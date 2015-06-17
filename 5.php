@@ -8,6 +8,8 @@ $user1 = new User();
 $user2 = new User();
 $user3 = new User();
 
+echo "hi";
+
 // $profile = new Profile();
 
 // $user->setProfile($profile);
