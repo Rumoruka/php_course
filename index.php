@@ -2,8 +2,16 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$config = new \Doctrine\DBAL\Configuration();
-//..
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\DBAL\Configuration;
+use Doctrine\DBAL\DriverManager;
+
+//handle request
+$request = Request::createFromGlobals();
+
+
+$config = new Configuration();
+//connection to db
 $connectionParams = array(
     'dbname' => 'db',
     'user' => 'root',
@@ -12,15 +20,29 @@ $connectionParams = array(
     'port' => 3307,
     'driver' => 'pdo_mysql',
 );
-$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+$conn = DriverManager::getConnection($connectionParams, $config);
 
-if (isset($_GET['id'])){
-    
-    require_once 'post.php';
+switch ($request->server->get('PATH_INFO')) {
+	case '':
+		if ($request->query->getInt('id')) {
+   			require_once 'post.php';
+		} else {
+    		require_once 'posts.php';
+		}
+		break;	
 
-} else {
+	case '/admin/post':
+		if ($request->query->getInt('id')) {
+   			require_once 'admin-post.php';
+		} else {
+			require_once 'admin-posts.php';
+		}
+		break;
 
-    require_once 'posts.php';
+	case '/admin/post/delete':
+		//@TODO query delete
+		break;	
+	default: 
+		header("HTTP/1.0 404 Not Found");
+		require '404.php';	
 }
-
-
