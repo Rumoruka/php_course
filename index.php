@@ -40,7 +40,7 @@ switch ($request->server->get('PATH_INFO')) {
 		break;
 
 	case '/admin/post/delete':
-		//@TODO query delete
+		require_once 'delete.php';
 		break;	
 	default: 
 		header("HTTP/1.0 404 Not Found");
