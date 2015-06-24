@@ -22,6 +22,18 @@ $connectionParams = array(
 );
 $conn = DriverManager::getConnection($connectionParams, $config);
 
+function path($path = '')
+{
+	global $request;
+	return $request->server->get('SCRIPT_NAME') . $path;
+}
+
+function url($path = '')
+{
+	global $request;
+	return $request->server->getSchemeAndHttpHost() . path($path);
+}
+
 switch ($request->server->get('PATH_INFO')) {
 	case '':
 		if ($request->query->getInt('id')) {
@@ -39,8 +51,17 @@ switch ($request->server->get('PATH_INFO')) {
 		}
 		break;
 
+
+	case '/admin/post/new':
+		require_once 'admin-post.php';
+		break;
+
 	case '/admin/post/delete':
-		require_once 'delete.php';
+		$conn->delete('posts', [
+			'id' => $request->query->getInt('id'),
+		]);
+		header('Location:' . path('/admin/post'));
+		exit;
 		break;	
 	default: 
 		header("HTTP/1.0 404 Not Found");

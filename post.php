@@ -1,7 +1,7 @@
 <?php
 
 
-$post = $conn->fetchAssoc("SELECT * FROM posts WHERE published = 1 AND id = :id", 
+$post = $conn->fetchAssoc("SELECT * FROM posts WHERE id = :id", 
 	array('id' => $request->query->getInt('id'),//(int) $_GET['id'],
 		));
 // $stmt->bindValue("id", (int) $_GET['id']); 
