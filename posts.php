@@ -1,6 +1,6 @@
 <?php
 
-$posts = $conn->fetchAll("SELECT * FROM posts");
+$posts = $conn->fetchAll("SELECT * FROM posts WHERE published = 1");
 
 ?>
 

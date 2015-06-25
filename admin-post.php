@@ -36,6 +36,9 @@ $post = $conn->fetchAssoc("SELECT * FROM posts WHERE id = :id",
 		<input type="text" name="heading" value="<?= $post['heading']?>">
 	</div>
 	<div>
+		Published:<input type="checkbox" name="published" value="1">
+	</div>
+	<div>
 		Intro:<br>	
 		<textarea name="intro" id="" cols="30" rows="10"><?=$post['intro']?></textarea>
 	</div>	

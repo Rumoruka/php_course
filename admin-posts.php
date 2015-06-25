@@ -15,6 +15,7 @@ $posts = $conn->fetchAll("SELECT * FROM posts");
 		<th>ID</th>
 		<th>Heading</th>
 		<th>Intro</th>
+		<th>Published</th>
 		<th>Actions</th>
 	</tr>
 <?php foreach ($posts as $post) : ?>
@@ -22,6 +23,7 @@ $posts = $conn->fetchAll("SELECT * FROM posts");
 		<td><?= $post['id'] ?></td>
 		<td><?= $post['heading'] ?></td>
 		<td><?= $post['intro'] ?></td>
+		<td><?= $post['published'] ?></td>
 		<td>
 			<a href="<?= $request->server->get('SCRIPT_NAME') ?>/admin/post?id=<?=$post['id'] ?>">edit</a>
 			<a href="<?= $request->server->get('SCRIPT_NAME') ?>?id=<?=$post['id'] ?>">show</a>
